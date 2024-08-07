@@ -1,0 +1,40 @@
+<section class="text-center">
+  <h1>Task</h1>
+  <input type="text" [(ngModel)]="Task" placeholder="Enter Task" />
+  <button (click)="createTask()">Crear Tarea</button>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Tarea</th>
+          <th scope="col">Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (tarea of TaskList; track tarea.id) {
+        <tr>
+          <td scope="row">{{ tarea.id }}</td>
+          <td>
+            <input
+              type="text"
+              [(ngModel)]="tarea.task"
+              [value]="tarea.task"
+              [disabled]="boolean"
+            />
+          </td>
+          <td>
+            <button (click)="put()">Editar</button>
+            <button (click)="deleteTask(tarea.id)">Eliminar</button>
+            @if(!boolean){
+            <ng-container>
+              <button (click)="putTask(tarea.id, tarea.task)">Guardar</button>
+            </ng-container>
+            }
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>
